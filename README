@@ -1,5 +1,3 @@
-This is the homepage of mmds.
+This is mmds.
 
-If you would like a fresh R package, click "Downloads" above. Otherwise, if you're familiar with git, just clone the url above.
-
-
+mmds implements mixture model distance sampling.
