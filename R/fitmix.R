@@ -240,7 +240,7 @@
       varnp<-var.Np(lt$par,mix.terms,width,z,zdim,pt,n,
                     H.inv,ret.list$N,ret.list$pa)
       ret.list$N.se<-sqrt(varnp$N)#/sqrt(n)
-      ret.list$pa.se<-sqrt(varnp$pa)#/sqrt(n)
+      ret.list$pa.se<-NA#sqrt(varnp$pa)#/sqrt(n)
 
       # Calculate the AIC
       ret.list$aic<- -(2*lt$value)+(2*length(lt$par))

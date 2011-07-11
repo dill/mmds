@@ -20,10 +20,18 @@ step.ds.mixture<-function(ds.object,max.terms=4){
    mix.terms<-mix.terms+1
 
    while( (mix.terms<max.terms)){
-      this.model<-try(fitmix(ds.object$data,ds.object$ftype,ds.object$model.formula,
-                         mix.terms,NULL,ds.object$width,ds.object$showit,
-                         ds.object$ctrl.options,ds.object$opt.method,
-                         ds.object$usegrad,ds.object$pt))
+#data,width,mix.terms=1,pt=FALSE,model.formula="~1",initialvalues=NULL,showit=0,ctrl.options=c(maxit=10000),opt.method="BFGS+SANN",usegrad=TRUE,ftype="hn"){
+      this.model<-try(fitmix(data=ds.object$data,
+                             ftype=ds.object$ftype,
+                             model.formula=ds.object$model.formula,
+                             mix.terms=mix.terms,
+                             initialvalues=NULL,
+                             width=ds.object$width,
+                             showit=ds.object$showit,
+                             ctrl.options=ds.object$ctrl.options, 
+                             opt.method=ds.object$opt.method,
+                             usegrad=ds.object$usegrad,
+                             pt=ds.object$pt))
 
       if(class(this.model)!="try-error"){
          cat("   ",mix.terms,"        ",this.model$aic,"\n")
