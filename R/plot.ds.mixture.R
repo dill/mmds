@@ -126,6 +126,8 @@ plot.ds.mixture<-function(fit.object,style="",main="",breaks="Sturges",ylim=NULL
    }else{
    ##### covariate code
 
+      ylabel<-"Probability of detection"
+
       # calculate mu per observation
       mu<-apply(sigma,1,intfcn,width)
       mus<-mu%*%matrix(pis,length(pis),1)
