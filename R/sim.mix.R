@@ -34,11 +34,11 @@ sim.mix<-function(pars,mix.terms,n,width,zdim=0,z=NULL,pt=FALSE,showit=FALSE){
          M<-optimize(eval.pdf2,interval=c(0,width),maximum=TRUE,fpar=pars,
                      mix.terms=mix.terms,pt=pt,z=z.obj,zdim=zdim,width=width)$maximum
 
-         mult<-proposal/(M*mu.calc(pars,mix.terms,width,z.obj,zdim,pt))
+         mult<-2*pi*proposal/(M*mu.calc(pars,mix.terms,width,z.obj,zdim,pt))
       }
 
 
-      if(U<=width*mult*detfct(proposal,pars,mix.terms,
+      if(U<=mult*detfct(proposal,pars,mix.terms,
                      zdim=zdim,z=z.obj)){
          counter<-counter+1
          out[counter]<-proposal
