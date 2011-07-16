@@ -238,9 +238,9 @@
 
       ### Calculate the standard error of P_a and N
       varnp<-var.Np(lt$par,mix.terms,width,z,zdim,pt,n,
-                    H.inv,ret.list$N,ret.list$pa)
-      ret.list$N.se<-sqrt(varnp$N)#/sqrt(n)
-      ret.list$pa.se<-NA#sqrt(varnp$pa)#/sqrt(n)
+                    H.inv,ret.list$N,ret.list$pa.vec,ret.list$pa)
+      ret.list$N.se<-varnp$N.se
+      ret.list$pa.se<-varnp$pa.se
 
       # Calculate the AIC
       ret.list$aic<- -(2*lt$value)+(2*length(lt$par))
