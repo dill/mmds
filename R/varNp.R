@@ -32,13 +32,21 @@ var.Np<-function(pars,mix.terms,width,z,zdim,pt,n,H.inv,N,pa.vec,pa){
    ### calculate variance, se and CV for average detectability
 
    # function for calculating pa, for DeltaMethod()
+   #pafct<-function(pars,mix.terms,width,z,zdim,pt,n){
+   #   mu<-mu.calc(pars,mix.terms,width,z,zdim,pt)
+
+   #   if(length(mu)!=n){
+   #      mu<-rep(mu,n)
+   #   }
+   #   return((n/width)*1/(sum(1/mu)))
+   #}
    pafct<-function(pars,mix.terms,width,z,zdim,pt,n){
       mu<-mu.calc(pars,mix.terms,width,z,zdim,pt)
 
       if(length(mu)!=n){
          mu<-rep(mu,n)
       }
-      return((n/width)*1/(sum(1/mu)))
+      return(sum(mu/mu))
    }
    vc1.list<-DeltaMethod(pars,pafct,H.inv,0.001,mix.terms=mix.terms,
                       width=width,z=z,zdim=zdim,pt=pt,n=n)

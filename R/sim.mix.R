@@ -26,26 +26,30 @@ sim.mix<-function(pars,mix.terms,n,width,zdim=0,z=NULL,pt=FALSE,showit=FALSE){
 
          # dummy function with x first
          eval.pdf2<-function(x,fpar,width,mix.terms,showit=0,ftype="hn",
-                              z=NULL,zdim=0,pt=FALSE,EM=FALSE){
+                              z=NULL,zdim=0,pt=TRUE){
             sum(eval.pdf(fpar,data.frame(distance=x),width,mix.terms,
-                           showit,ftype,z,zdim,pt,EM))
+                           showit,ftype,z,zdim,pt))
          }
                
          M<-optimize(eval.pdf2,interval=c(0,width),maximum=TRUE,fpar=pars,
-                     mix.terms=mix.terms,pt=pt,z=z.obj,zdim=zdim,width=width)$maximum
+                     mix.terms=mix.terms,pt=pt,z=z.obj,zdim=zdim,
+                     width=width)$objective
 
-         mult<-(2*pi*proposal/mu.calc(pars,mix.terms,width,z.obj,zdim,pt))/M
+         nu<-mu.calc(pars,mix.terms,width,z.obj,zdim,pt)
+
+         mult<-(2*pi*proposal/nu)/M
       }
 
-
-      if(U<=mult*detfct(proposal,pars,mix.terms,
+      # accept/reject
+      if(U<=(mult*width)*detfct(proposal,pars,mix.terms,
                      zdim=zdim,z=z.obj)){
          counter<-counter+1
          out[counter]<-proposal
       }
+
    }
 
-   out<-data.frame(observed=rep(1,n),object=1:n,distance=abs(out))
+   out<-data.frame(observed=rep(1,n),object=1:n,distance=out)
 
    if(!is.null(z)){
       out<-cbind(out,z[[1]])

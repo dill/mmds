@@ -1,4 +1,4 @@
-eval.pdf<-function(fpar,x,width,mix.terms,showit=0,ftype="hn",z=NULL,zdim=0,pt=FALSE,EM=FALSE){
+eval.pdf<-function(fpar,x,width,mix.terms,showit=0,ftype="hn",z=NULL,zdim=0,pt=FALSE,...){
    #### evaluate the pdf
 
    # get some parameters
