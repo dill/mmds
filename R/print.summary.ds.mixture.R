@@ -16,7 +16,7 @@
    cat("\nDetection function parameters", "\n")
    print(x$coeff$pars)
    if(x$mix.terms>1){
-      cat("\nMixture proportions (pi scale): ", "\n")
+      cat("\nMixture proportions (phi scale): ", "\n")
       print(x$coeff$mix.prop)
    }
    cat("\n")
