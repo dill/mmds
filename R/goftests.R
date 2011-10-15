@@ -38,8 +38,6 @@
             keysh<-key.shape[j]
          }
 
-         muj<-intfcn(keysc,width)
-
          cdf.eval[i]<-cdf.eval[i]+mix.prop[j]*intfcn(keysc,x$distance[i])
       }
    }
@@ -50,7 +48,7 @@
    cdfvalues<-sort(cdf.eval)
    n<-length(cdfvalues)
 
-   # EDF idicator function
+   # EDF indicator function
    edf.ind <- function(x,a,lt){
       if(lt)
          length(a[a<x])

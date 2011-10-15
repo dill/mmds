@@ -41,9 +41,11 @@ summary.ds.mixture<-function(model,...){
    # average p
    ans$average.p<-model$pa
    ans$average.p.se<-model$pa.se
+   ans$average.p.cv<-model$pa.se/model$pa
    # abundance
    ans$Nhat <- model$N
    ans$Nhat.se <- model$N.se
+   ans$Nhat.cv <- model$N.se/model$N
 
    # set the class and return
    class(ans) <- "summary.ds.mixture"

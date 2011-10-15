@@ -216,31 +216,18 @@
          ret.list$pa<-n/ret.list$N
       }
 
-      # invert the Hessian to get the var/covar matrix
-      if(length(lt$par)==1){
-         # with only 1 parameter, just use the reciprocal
-         H.inv<-1/lt$hessian
-      }else{
-         # otherwise try to solve it
-         H.inv<-try(solve(lt$hessian))
+
+      ## invert the Hessian to get the var/covar matrix
+      H.inv<-solvecov(-lt$hessian)$inv
       
-         # if that doesn't work use a pseudo-inverse
-         if(class(H.inv)=="try-error"){
-            warning("Error in calculation of standard error of P_a: Hessian singular\n")
-            warning("Using pseudoinverse to calculate var(P_a), YMMV.\n")
-            library(MASS)
-            H.inv<-ginv(lt$hessian)
-         }
-      }
-      H.inv<- -H.inv
       # store the standard errors of the parameters
-      ret.list$pars.se<-sqrt(diag(H.inv))
 
       ### Calculate the standard error of P_a and N
       varnp<-var.Np(lt$par,mix.terms,width,z,zdim,pt,n,
-                    H.inv,ret.list$N,ret.list$pa.vec,ret.list$pa)
+                    H.inv,ret.list$N,ret.list$pa.vec,ret.list$pa,data)
       ret.list$N.se<-varnp$N.se
       ret.list$pa.se<-varnp$pa.se
+      ret.list$pars.se<-sqrt(diag(varnp$vcov))
 
       # Calculate the AIC
       ret.list$aic<- -(2*lt$value)+(2*length(lt$par))

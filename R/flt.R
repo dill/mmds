@@ -20,7 +20,6 @@
    res<-rowSums(res)
 
    # Calculate the sum of the log likelihood
-   #lnl <- sum(log(res))
    lnl <- sum(log(res),na.rm=TRUE)
 
    # debug output -- log likelihood and pars
