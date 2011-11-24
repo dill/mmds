@@ -135,7 +135,7 @@
    
 
       if(length(aics)==0){
-         cat(paste(mix.terms,"-point model could not be fitted! Try changing initial values\n")
+         cat(paste(mix.terms,"-point model could not be fitted! Try changing initial values\n"))
          lt<-list(par=NA)
          class(lt)<-"try-error"
       }else{
