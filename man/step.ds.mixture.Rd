@@ -1,4 +1,5 @@
 \name{step.ds.mixture}
+\alias{step.ds.mixture}
 \title{Stepwise selection of mixture components}
 \description{
 Uses AIC to select the number of mixture components.
@@ -22,8 +23,6 @@ Progress will be printed to the screen.
 Miller, D.L. and L. Thomas (in prep.). Mixture model distance sampling detection functions.
  }
 \author{David Lawrence Miller}
-\note{
-}
 \seealso{\code{\link{summary.ds.mixture}}, \code{\link{step.ds.mixture}},\code{\link{plot.ds.mixture}}, \code{\link{sim.mix}}, \code{\link{mmds.gof}},\code{\link{ds.mixture}}, \code{\link{mmds.gof}}, \code{\link{fitmix}}, \code{\link{mmds.pars}}, \code{\link{step.ds.mixture}}}
 \examples{
 

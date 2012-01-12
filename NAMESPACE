@@ -1,0 +1,15 @@
+# Default NAMESPACE created by R
+# Remove the previous line if you edit this file
+
+# Export all names
+export(fitmix)
+export(getpars)
+export(sim.mix)
+export(step.ds.mixture)
+export(inv.reparam.pi)
+export(reparam.pi)
+export(plot.ds.mixture)
+S3method(print,ds.mixture)
+S3method(plot,ds.mixture)
+S3method(summary,ds.mixture)
+S3method(print,summary.ds.mixture)

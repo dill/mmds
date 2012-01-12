@@ -1,4 +1,8 @@
-plot.ds.mixture<-function(fit.object,style="",main="",breaks="Sturges",ylim=NULL,xlim=NULL,pdf=FALSE,plot.formula=NULL,hide.hist=FALSE,nomf=FALSE,x.axis=NULL){
+#plot.ds.mixture<-function(x,...){
+#plot.ds.mixture<-function(fit.object,style="",main="",breaks="Sturges",ylim=NULL,xlim=NULL,pdf=FALSE,plot.formula=NULL,hide.hist=FALSE,nomf=FALSE,x.axis=NULL){
+
+plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NULL,pdf=FALSE,plot.formula=NULL,hide.hist=FALSE,nomf=FALSE,x.axis=NULL,...){
+   fit.object<-x
 
    # todo:
    #  * level legend
@@ -301,7 +305,7 @@ ws0<-1
          }
          # how big does mfrow have to be?
          if(length(plot.seq)>4){
-            mfrows<-c(celing(length(plot.seq)/4),4)
+            mfrows<-c(ceiling(length(plot.seq)/4),4)
          }else{
             mfrows<-c(1,length(plot.seq))
          }

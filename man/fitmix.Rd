@@ -34,8 +34,6 @@ See \code{\link{step.ds.mixture}} for AIC selection for the number of mixture co
 Miller, D.L. and L. Thomas (in prep.). Mixture model distance sampling detection functions.
  }
 \author{David Lawrence Miller}
-\note{
-}
 \seealso{\code{\link{summary.ds.mixture}}, \code{\link{step.ds.mixture}},\code{\link{plot.ds.mixture}}, \code{\link{sim.mix}}, \code{\link{mmds.gof}},\code{\link{ds.mixture}}, \code{\link{mmds.gof}}, \code{\link{fitmix}}, \code{\link{mmds.pars}}, \code{\link{step.ds.mixture}}}
 \examples{
 

@@ -1,9 +1,11 @@
 \name{sim.mix}
+\alias{sim.mix}
 \title{Simulate data from a mixture model detection function}
 \description{
 Simulate data from a (line or point transect) mixture model detection function with or without covariates using rejection sampling.
 }
 \usage{
+sim.mix(pars,mix.terms,n,width,zdim=0,z=NULL,pt=FALSE,showit=FALSE)
 }
 \arguments{
    \item{pars}{Parameters of the model to fit. See \code{\link{mmds.pars}} for details.}
@@ -16,6 +18,7 @@ Simulate data from a (line or point transect) mixture model detection function w
    \item{showit}{Print the acceptance rate. Defaults to FALSE.}
 }
 \details{
+This routine uses rejection sampling, so may be rather slow of large sample sizes. Direct sampling will be available soon.
 }
 \value{
   result: a \code{data.frame} with the following columns:
@@ -28,8 +31,6 @@ Simulate data from a (line or point transect) mixture model detection function w
 Miller, D.L. and L. Thomas (in prep.). Mixture model distance sampling detection functions.
  }
 \author{David Lawrence Miller}
-\note{
-}
 \seealso{\code{\link{summary.ds.mixture}}, \code{\link{step.ds.mixture}},\code{\link{plot.ds.mixture}}, \code{\link{mmds.gof}},\code{\link{ds.mixture}}, \code{\link{mmds.gof}}, \code{\link{fitmix}}, \code{\link{mmds.pars}}, \code{\link{step.ds.mixture}}}
 \examples{
 library(mmds)

@@ -1,9 +1,8 @@
 \name{ds.mixture}
+\alias{ds.mixture}
 \title{A fitted Mixture Model Detection Function Object}
 \description{
 The fitted mixture model detection function object returned by \code{\link{fitmix}}. Knowledge of most of this is not useful. Use \code{link{summary.ds.mixture}} for result summaries.}
-\details{
-}
 \value{A \code{\link{ds.mixture}} object has the following elements:
    \item{distance}{Vector of distances used in the analysis.}
    \item{likelihood}{Value of the log-likelihood at the maxima.}

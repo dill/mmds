@@ -1,4 +1,4 @@
-print.ds.mixture<-function(x,..){
+print.ds.mixture<-function(x,...){
    # default plotting method for ds.mixture objects
    # stops all of the object being printed
    cat("\nds.mixture object \n")

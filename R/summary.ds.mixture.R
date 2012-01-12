@@ -1,4 +1,4 @@
-summary.ds.mixture<-function(model,...){
+summary.ds.mixture<-function(object,...){
 # summary function for ds.mixture model object
 #
 # Arguments:
@@ -7,6 +7,8 @@ summary.ds.mixture<-function(model,...){
 # Value: summary object
 #
 # See print.summary.ds for how this gets printed
+
+   model<-object
 
    ans <- list()
    # Number of observations
