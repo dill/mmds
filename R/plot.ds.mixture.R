@@ -1,7 +1,7 @@
 #plot.ds.mixture<-function(x,...){
 #plot.ds.mixture<-function(fit.object,style="",main="",breaks="Sturges",ylim=NULL,xlim=NULL,pdf=FALSE,plot.formula=NULL,hide.hist=FALSE,nomf=FALSE,x.axis=NULL){
 
-plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NULL,pdf=FALSE,plot.formula=NULL,hide.hist=FALSE,nomf=FALSE,x.axis=NULL,...){
+plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NULL,pdf=FALSE,plot.formula=NULL,hide.hist=FALSE,nomf=FALSE,x.axis=NULL,xlab="Distance",ylab=NULL,...){
    fit.object<-x
 
    # todo:
@@ -71,7 +71,11 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
 
       # make the histogram object
       a<-hist(data$distance,plot=FALSE,breaks=breaks)
-      ylabel<-"Probability of detection"
+      if(is.null(ylab)){
+         ylabel<-"Probability of detection"
+      }else{
+         ylabel<-ylab
+      }
 
       # point transect data
       if(pt){
@@ -86,7 +90,11 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
             # this isn't really p at zero, it's the max on the y axis
             p.at.zero<-max(plotvals,a$density)
       
-            ylabel<-"PDF of detected distances"
+            if(is.null(ylab)){
+               ylabel<-"PDF of detected distances"
+            }else{
+               ylabel<-ylab
+            }
          # not pdf plotting
          }else{
             # rescale hist by distance
@@ -105,7 +113,7 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
       # actually do the plotting
       plot(a,freq=FALSE,ylab=ylabel,axes=FALSE,
            ylim=c(0,max(a$density,p.at.zero)),xlim=c(0,width),
-           xlab="Distance",border=hist.col,
+           xlab=xlab,border=hist.col,
            main=main)
       if(!is.null(x.axis)){
          axis(1,x.axis)
@@ -130,7 +138,11 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
    }else{
    ##### covariate code
 
-      ylabel<-"Probability of detection"
+      if(is.null(ylab)){
+         ylabel<-"Probability of detection"
+      }else{
+         ylabel<-ylab
+      }
 
       # calculate mu per observation
       mu<-apply(sigma,1,intfcn,width)
@@ -184,7 +196,11 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
             # this isn't really p at zero, it's the max on the y axis
             p.at.zero<-max(plotvals,a$density)
       
-            ylabel<-"PDF of detected distances"
+            if(is.null(ylab)){
+               ylabel<-"PDF of detected distances"
+            }else{
+               ylabel<-ylab
+            }
 
             style<-""
          # not pdf plotting
@@ -329,7 +345,7 @@ ws0<-1
 
          # plot the histogram
          plot(a,freq=FALSE,ylab=ylabel,axes=FALSE,
-              ylim=c(0,max(a$density,p.at.zero)),xlab="Distance",
+              ylim=c(0,max(a$density,p.at.zero)),xlab=xlab,
               main=plot.names[i],xlim=c(0,width),las=1,border=hist.col)
 
          if(!is.null(x.axis)){
