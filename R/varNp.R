@@ -94,8 +94,8 @@ x2<-   log(rowSums(eval.pdf(fpar,x,width,mix.terms,0,"hn",z,zdim,pt)))
    vc1.list<-DeltaMethod(pars,pafct,vcov,eps,mix.terms=mix.terms,
                       width=width,z=z,zdim=zdim,pt=pt,n=n)
    vc1<-vc1.list$variance
-   vc2<-sum(pa.vec^2*(1 - pa.vec)/pa.vec^2)
-   covar<-sum(pa.vec*(1 - pa.vec)/pa.vec^2)
+   vc2<-sum(1 - pa.vec)
+   covar<-sum((1 - pa.vec)/pa.vec)
    var.pbar.list<-list(var=vc1+vc2,partial=vc1.list$partial,covar=covar)
 
    covar<-t(Nhatvar.list$partial)%*%vcov%*%var.pbar.list$partial+

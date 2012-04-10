@@ -1,11 +1,16 @@
+#' Grab parameter values
+#'
+#' Extract parameter values and create a named list.
+#'
+#' @param fpar The \code{$par} element \code{\link{ds.mixture}} object.
+#' @param mix.terms Number of mixture components.
+#' @param zdim Number of covariates.
+#' @param z Covariate matrix.
+#' @return a named list with elements \code{$key.scale} (giving the key scales)
+#'     and \code{$mix.prop} giving the mixture proportions.
+#'
+#' @author David L. Miller
 getpars<-function(fpar,mix.terms,zdim=0,z=NULL){
-   ### calculate the parameter values
-   # Args:
-   #  fpar          parameters from optimisation
-   #  mix.terms     number of mixture components
-   #  zdim          dimension of the z matrix/matrices
-   #  z             covariate matrix (matrices)
-
    # grab the mixture proportions
    if(mix.terms != 1){
       mix.prop.tmp<-fpar[(length(fpar)-mix.terms+2):length(fpar)]

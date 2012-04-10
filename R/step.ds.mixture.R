@@ -1,8 +1,34 @@
+#' Stepwise selection of mixture components
+#'
+#' Uses AIC to select the number of mixture components.
+#'
+#' @param ds.object \code{\link{ds.mixture}} object.
+#' @param max.terms Maximum number of mixture components to attempt to fit. 
+#'    Default 4.
+#' @return a \code{\link{ds.mixture}} model object of the best (AIC-wise) model.
+#'
+#' @section Details:
+#' This routine is most useful during model building. Setting up a basic 1-point
+#' mixture model and then running this on the object returns a model with the 
+#' lowest AIC.
+#' 
+#' Progress will be printed to the screen.
+#'
+#'
+#' @author David L. Miller
+#' @examples
+#' library(mmds)
+#' set.seed(0)
+#' ## simulate some line transect data from a 2 point mixture
+#' sim.dat<-sim.mix(c(-0.223,-1.897,inv.reparam.pi(0.3)),2,100,1)
+#' ## fit the model
+#' fit.sim.dat.1<-fitmix(sim.dat,1,1)
+#' ## find best AIC model
+#' step.ds.mixture(fit.sim.dat.1)
 step.ds.mixture<-function(ds.object,max.terms=4){
    # equivalent of step() for ds.mixture objects
    # adds 1 to the mix.terms every time, starts from
    # wherever it was set.
-
 
    cat("\nStepwise mixture component selection.\n")
 
