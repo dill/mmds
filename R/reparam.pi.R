@@ -3,12 +3,10 @@
 #' Re-parameterise the mixture proportions so that when there is more than a 
 #' 2-point mixture, the proportions sum to 1.
 #'
-#' @aliases inv.reparam.pi reparam.pi
-#'
-#' @param mix.prop A set of mixture proportions.
-#' @param lastpar Is the last parameter provided, i.e. does sum(mix.prop)=1?
 #' @param thetas Mixture proportions in their parametrisation for optimization.
-#' @return a vector of parameters in one or other parametrisation
+#' @return a vector of parameters 
+#'
+#' @export
 #'
 #' @section Notes:
 #' See Miller and Thomas for information on exactly how these are calculated. 
@@ -17,12 +15,13 @@
 #' @references
 #' Miller, D.L. and L. Thomas (in prep.). Mixture model distance sampling detection functions.
 #'
+#' @seealso inv.reparam.pi
+#'
 #' @author David L. Miller
 #' @examples
 #' library(mmds)
 #' reparam.pi(inv.reparam.pi(0.3))
 #' reparam.pi(inv.reparam.pi(c(0.3,0.4,0.1),lastpar=TRUE))
-#' 
 reparam.pi<-function(thetas){
    # re-parameterise the pis 
 

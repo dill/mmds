@@ -1,3 +1,7 @@
 export(fitmix)
+export(inv.reparam.pi)
+export(reparam.pi)
+export(sim.mix)
+export(step.ds.mixture)
 S3method(plot,ds.mixture)
 S3method(summary,ds.mixture)

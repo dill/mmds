@@ -5,7 +5,7 @@
 #' 
 #' The fitted mixture model detection function object returned by 
 #' \code{\link{fitmix}}. Knowledge of most of this is not useful. Use 
-#' \code{link{summary.ds.mixture}} for result summaries.}
+#' \code{link{summary.ds.mixture}} for result summaries.
 #'
 #' @name ds.mixture
 #' @section Details:
@@ -47,7 +47,7 @@
 #'            p-value and \code{Dn}, the test statistic. See 
 #'            \code{\link{mmds.gof}} for more information.\cr}
 #'
-#' \author{David L. Miller}
+#' @author David L. Miller
 #' @section Note:
 #' \code{ds.mixture} objects can be passed to \code{\link{step.ds.mixture}} to 
 #'    select number of mixture components based on AIC score. 

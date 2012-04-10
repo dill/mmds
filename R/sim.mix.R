@@ -13,14 +13,16 @@
 #' @param width Truncation distance.
 #' @param zdim Number of columns of \code{z}. Defaults to 0.
 #' @param z Covariate data. Defaults to NULL. See details for more information.
-#' @param pt Should point transect data be generated? Defaults to FALSE.}
-#' @param showit Print the acceptance rate. Defaults to FALSE.}
+#' @param pt Should point transect data be generated? Defaults to FALSE.
+#' @param showit Print the acceptance rate. Defaults to FALSE.
 #' @return a \code{data.frame} with the following columns:
 #'    \tabular{ll}{
 #'    observed \tab Whether the object was observed, always \code{n} 1s. Kept for \code{mmds} compatability.\cr
 #'    object \tab Object identifier, numbered 1 to \code{n}. Kept for \code{mmds} compatability.\cr
 #'    distance \tab Observed distances.\cr
 #'   \tab Then follows as many columns as there are columns as \code{z}, named as in \code{z}.}
+#'
+#' @export
 #'
 #' @author David L. Miller
 #' @examples

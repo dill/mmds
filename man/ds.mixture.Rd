@@ -5,7 +5,7 @@
   The fitted mixture model detection function object
   returned by \code{\link{fitmix}}. Knowledge of most of
   this is not useful. Use \code{link{summary.ds.mixture}}
-  for result summaries.}
+  for result summaries.
 }
 \section{Details}{
   A \code{\link{ds.mixture}} object has the following
@@ -40,13 +40,14 @@
   Kolmogorov-Smirnov test results. List containing:
   \code{p}, the p-value and \code{Dn}, the test statistic.
   See \code{\link{mmds.gof}} for more information.\cr}
-
-  \author{David L. Miller}
 }
 
 \section{Note}{
   \code{ds.mixture} objects can be passed to
   \code{\link{step.ds.mixture}} to select number of mixture
   components based on AIC score.
+}
+\author{
+  David L. Miller
 }
 

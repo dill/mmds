@@ -51,6 +51,10 @@
   publication plots.  Defaults to NULL, which uses the
   default R values.}
 
+  \item{xlab}{Label for the x axis.}
+
+  \item{ylab}{Label for the y axis.}
+
   \item{...}{not used at the moment}
 }
 \value{
@@ -75,7 +79,7 @@ sim.dat<-sim.mix(c(-0.223,-1.897,inv.reparam.pi(0.3)),2,100,1)
 ## fit the model
 fit.sim.dat<-fitmix(sim.dat,1,2)
 ## plot
-plot.ds.mixture(fit.sim.dat)
+plot(fit.sim.dat)
 }
 \author{
   David L, Miller

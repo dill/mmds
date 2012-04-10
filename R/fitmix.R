@@ -18,7 +18,7 @@
 #' @param opt.method Optimisation method to use, one of "BFGS", "BFGS+SANN" or 
 #'              "EM". Defaults to "BFGS+SANN", see Details.
 #' @param usegrad Should analytic derivatives be used in the optimisation? 
-#'                Default TRUE.}
+#'                Default TRUE.
 #' @param ftype Function type to be used as the detection function, currently 
 #'            only "hn".
 #' @return a \code{\link{ds.mixture}} model object.

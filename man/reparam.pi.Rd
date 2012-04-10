@@ -1,21 +1,15 @@
 \name{reparam.pi}
-\alias{inv.reparam.pi}
 \alias{reparam.pi}
 \title{Reparametrize mixture proportions}
 \usage{
   reparam.pi(thetas)
 }
 \arguments{
-  \item{mix.prop}{A set of mixture proportions.}
-
-  \item{lastpar}{Is the last parameter provided, i.e. does
-  sum(mix.prop)=1?}
-
   \item{thetas}{Mixture proportions in their
   parametrisation for optimization.}
 }
 \value{
-  a vector of parameters in one or other parametrisation
+  a vector of parameters
 }
 \description{
   Re-parameterise the mixture proportions so that when
@@ -38,5 +32,8 @@ reparam.pi(inv.reparam.pi(c(0.3,0.4,0.1),lastpar=TRUE))
 \references{
   Miller, D.L. and L. Thomas (in prep.). Mixture model
   distance sampling detection functions.
+}
+\seealso{
+  inv.reparam.pi
 }
 

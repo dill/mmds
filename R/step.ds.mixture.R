@@ -14,8 +14,10 @@
 #' 
 #' Progress will be printed to the screen.
 #'
-#'
 #' @author David L. Miller
+#'
+#' @export
+#'
 #' @examples
 #' library(mmds)
 #' set.seed(0)

@@ -37,7 +37,7 @@
   Details.}
 
   \item{usegrad}{Should analytic derivatives be used in the
-  optimisation?  Default TRUE.}}
+  optimisation?  Default TRUE.}
 
   \item{ftype}{Function type to be used as the detection
   function, currently only "hn".}

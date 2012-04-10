@@ -22,10 +22,10 @@
   for more information.}
 
   \item{pt}{Should point transect data be generated?
-  Defaults to FALSE.}}
+  Defaults to FALSE.}
 
   \item{showit}{Print the acceptance rate. Defaults to
-  FALSE.}}
+  FALSE.}
 }
 \value{
   a \code{data.frame} with the following columns:

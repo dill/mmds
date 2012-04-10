@@ -27,6 +27,8 @@
 #'    plots for publication. Defaults to FALSE (yes, change the mfrow value).
 #' @param x.axis Set the x axis labels. Again, useful for publication plots. 
 #'    Defaults to NULL, which uses the default R values.
+#' @param xlab Label for the x axis.
+#' @param ylab Label for the y axis.
 #' @param ... not used at the moment 
 #' @return a plot!
 #'
@@ -44,7 +46,7 @@
 #' ## fit the model
 #' fit.sim.dat<-fitmix(sim.dat,1,2)
 #' ## plot 
-#' plot.ds.mixture(fit.sim.dat)
+#' plot(fit.sim.dat)
 #'
 #' @export
 #' @S3method plot ds.mixture
