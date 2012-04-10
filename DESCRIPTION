@@ -43,3 +43,4 @@ Collate:
     'switchpars.R'
     'varNp.R'
     'zzz.R'
+    'mmds-package.R'

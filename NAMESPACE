@@ -1,1 +1,3 @@
 export(fitmix)
+S3method(plot,ds.mixture)
+S3method(summary,ds.mixture)
