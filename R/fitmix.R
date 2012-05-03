@@ -288,5 +288,4 @@ fitmix<-function(data,width,mix.terms=1,pt=FALSE,model.formula="~1",initialvalue
    # if we did't return then...
    # What to do if optim() fails
    stop("Optimisation has failed or ran out of iterations.\n")
-   return(NA)
 }
