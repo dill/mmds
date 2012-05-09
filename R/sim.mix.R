@@ -24,14 +24,57 @@
 #'
 #' @export
 #'
-#' @author David L. Miller
+#' @author David L. Miller, Len Thomas
 #' @examples
 #' library(mmds)
 #' set.seed(0)
 #' ## simulate some line transect data from a 2 point mixture
 #' sim.dat<-sim.mix(c(-0.223,-1.897,inv.reparam.pi(0.3)),2,100,1)
 #' hist(sim.dat$distance)
-sim.mix<-function(pars,mix.terms,n,width,zdim=0,z=NULL,pt=FALSE,showit=FALSE){
+sim.mix<-function(pars,mix.terms,n,width,zdim=0,z=NULL,pt=FALSE,showit=FALSE,key="hn",hr.shape=5){
+
+  # need to integrate these into the rest of the code?
+  detfct.tmp<-function(x,pars,mix.terms,zdim=0,z=NULL,key="hn",hr.shape=NULL){
+     # evaluate the total detection function for either hn or hr keys - no error
+     # checking on inputs, assumes that's been done earlier
+  
+     gp<-getpars(pars,mix.terms,zdim,z)
+     sigmas<-gp$key.scale
+     pis<-gp$mix.prop
+  
+     res<-rep(0,length(x))
+  
+     for(j in 1:mix.terms){
+  
+        if(is.null(z)){
+           keysc<-sigmas[j]
+        }else{
+           keysc<-sigmas[j,]
+        }
+        res<- res+pis[j] * switch(key,
+          "hn"=keyfct.hn(x,keysc),
+          "hr"=keyfct.hr(x,keysc,hr.shape),
+          0)
+     }
+     return(res)
+  }
+  
+  keyfct.hr<-function(x,keysc,hr.shape){
+    return(1-exp(-(x/keysc)^-hr.shape))
+  }
+
+# hist(sim.dat<-sim.mix(c(log(0.1),log(0.8),inv.reparam.pi(0.5)),2,100000,1,pt=F,key="hr",hr.shape=5)$distance)
+
+
+   #check input on "key" parameter
+   if(key=="hr"){
+     #Check no covarriates and no pt
+     if(pt) stop("point transects not supported for hazard rate mixtures")
+     if(zdim>0) stop("covariates not supported for hazard rate mixtures")
+   
+   } else {
+     if (key!="hn") stop ("argument to 'key' parameter not recognized")
+   }
 
    out<-rep(0,n)
    counter<-0
@@ -73,8 +116,8 @@ sim.mix<-function(pars,mix.terms,n,width,zdim=0,z=NULL,pt=FALSE,showit=FALSE){
       }
 
       # accept/reject
-      if(U<=(mult*width)*detfct(proposal,pars,mix.terms,
-                     zdim=zdim,z=z.obj)){
+      if(U<=(mult*width)*detfct.tmp(proposal,pars,mix.terms,
+                     zdim=zdim,z=z.obj,key=key,hr.shape=hr.shape)){
          counter<-counter+1
          out[counter]<-proposal
       }
@@ -93,3 +136,5 @@ sim.mix<-function(pars,mix.terms,n,width,zdim=0,z=NULL,pt=FALSE,showit=FALSE){
 
    return(out)
 }
+
+
