@@ -35,28 +35,33 @@ sim.mix<-function(pars,mix.terms,n,width,zdim=0,z=NULL,pt=FALSE,showit=FALSE,key
 
   # need to integrate these into the rest of the code?
   detfct.tmp<-function(x,pars,mix.terms,zdim=0,z=NULL,key="hn",hr.shape=NULL){
-     # evaluate the total detection function for either hn or hr keys - no error
-     # checking on inputs, assumes that's been done earlier
+    # evaluate the total detection function for either hn or hr keys - no error
+    # checking on inputs, assumes that's been done earlier
   
-     gp<-getpars(pars,mix.terms,zdim,z)
-     sigmas<-gp$key.scale
-     pis<-gp$mix.prop
+    gp<-getpars(pars,mix.terms,zdim,z)
+    sigmas<-gp$key.scale
+    pis<-gp$mix.prop
   
-     res<-rep(0,length(x))
+    res<-rep(0,length(x))
   
-     for(j in 1:mix.terms){
-  
-        if(is.null(z)){
-           keysc<-sigmas[j]
-        }else{
-           keysc<-sigmas[j,]
-        }
-        res<- res+pis[j] * switch(key,
-          "hn"=keyfct.hn(x,keysc),
-          "hr"=keyfct.hr(x,keysc,hr.shape),
-          0)
-     }
-     return(res)
+    if(key=="hr"){
+      if(length(hr.shape)==1){
+        hr.shape <- rep(hr.shape,mix.terms)
+      }
+    }
+
+    for(j in 1:mix.terms){
+      if(is.null(z)){
+         keysc<-sigmas[j]
+      }else{
+         keysc<-sigmas[j,]
+      }
+      res<- res+pis[j] * switch(key,
+        "hn"=keyfct.hn(x,keysc),
+        "hr"=keyfct.hr(x,keysc,hr.shape[j]),
+        0)
+    }
+    return(res)
   }
   
   keyfct.hr<-function(x,keysc,hr.shape){
