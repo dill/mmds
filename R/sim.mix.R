@@ -121,7 +121,7 @@ sim.mix<-function(pars,mix.terms,n,width,zdim=0,z=NULL,pt=FALSE,showit=FALSE,key
       }
 
       # accept/reject
-      if(U<=(mult*width)*detfct.tmp(proposal,pars,mix.terms,
+      if(U<=(mult)*detfct.tmp(proposal,pars,mix.terms,
                      zdim=zdim,z=z.obj,key=key,hr.shape=hr.shape)){
          counter<-counter+1
          out[counter]<-proposal
