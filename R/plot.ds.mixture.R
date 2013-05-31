@@ -93,7 +93,7 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
       mu<-c()
       for(j in 1:mix.terms)
          mu<-c(mu,intfcn(sigma[j],width))
-      
+
       # create a sequence to evaluate the detection function, and evaluate
       x.seq<-seq(0,width,len=plot.res)
       plotvals<-matrix(0,mix.terms,plot.res)
@@ -123,11 +123,11 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
             for(j in 1:mix.terms)
                plotvals[j,]<-2*pi*pis[j]*x.seq*keyfct.hn(x.seq,sigma[j])/
                                          intfcn(sigma[j],width)
-   
+
             a$density<-a$density*(1/sum(a$density*diff(a$breaks)))
             # this isn't really p at zero, it's the max on the y axis
             p.at.zero<-max(plotvals,a$density)
-      
+
             if(is.null(ylab)){
                ylabel<-"PDF of detected distances"
             }else{
@@ -145,7 +145,7 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
          musum<-sum(mu*pis)
          hist.area<-sum(a$density*diff(a$breaks))
          a$density<-a$density*(musum/hist.area)
-      }      
+      }
 
       par(las=1)
       # actually do the plotting
@@ -233,7 +233,7 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
             a$density<-a$density*(1/sum(a$density*diff(a$breaks)))
             # this isn't really p at zero, it's the max on the y axis
             p.at.zero<-max(plotvals,a$density)
-      
+
             if(is.null(ylab)){
                ylabel<-"PDF of detected distances"
             }else{
@@ -266,12 +266,13 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
       # vector of number of "levels" for each covar so
       # the graphics line up...
       plot.seq<-c(1)
-      
+
       if(style=="comp"){
          plotvals.comp<-c()
          for(j in 1:mix.terms){
-            curr<-apply(matrix(sigma[j,],1,length(sigma[j,])),2,keyfct.hn,distance=x.seq)
-            
+            curr <- apply(matrix(sigma[j,],1,length(sigma[j,])),
+                          2,keyfct.hn,distance=x.seq)
+
             # add in a weighting
             pas<-mus/width
             ws<-(1/pas)/sum(1/pas)
@@ -289,75 +290,131 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
       # default to all
       if(is.null(plot.formula))
          plot.formula<-fit.object$model.formula
-   
+
       # do nothing if the user asks
       if((as.character(plot.formula) != "none") & !(pt&pdf)){
 
          # make sure it's a formula
          plot.formula<-as.formula(plot.formula)
 
-
          # work out levels etc...
          for(curr.term in attr(terms.formula(plot.formula),"term.labels")){
-   
+
             # if we have a factor covariate
             if(grepl("^as.factor",curr.term)){
-               # indicator for column that we want
-               ind<-colnames(data)==gsub("^as.factor\\((\\w+)\\)$","\\1",curr.term)
-               # pull that column out
-               this.col<-data[,ind]
-               # find its levels
-               this.col.levels<-levels(as.factor(this.col))
-
-               for(tl in this.col.levels){
-                  ind0<-this.col==tl
-
-                  fac0<-sum(a$density*diff(a$breaks))/mean(mus[ind0])
-fac0<-1
-
-                  plotvals.mat0<-plotvals.mat[,ind0]
-                  pas0<-mus[ind0]/width
-                  ws0<-(1/pas0)/sum(1/pas0)
-ws0<-1
-                  plotvals.mat0<-t(t(plotvals.mat0)*c(ws0))
-                  plotvals0<-rowSums(plotvals.mat0)*fac0
-                  pv<-cbind(pv,plotvals0/plotvals0[1])
-                  colnames(pv)[ncol(pv)]<-paste(curr.term,"==",tl,sep="")
-         
-               }
-               plot.names<-c(plot.names,
-                             paste("Levels of ",curr.term,sep=""))
+#               # indicator for column that we want
+#               ind <- colnames(data)==gsub("^as.factor\\((\\w+)\\)$","\\1",
+#                                           curr.term)
+#               # pull that column out
+#               this.col<-data[,ind]
+#               # find its levels
+#               this.col.levels<-levels(as.factor(
+#                                 data[,gsub("^as.factor\\((\\w+)\\)$","\\1",
+#                                            curr.term)]))
+#
+#               for(tl in this.col.levels){
+#                  ind0<-this.col==tl
+#
+#                  fac0<-sum(a$density*diff(a$breaks))/mean(mus[ind0])
+#
+#                  plotvals.mat0<-plotvals.mat[,ind0]
+#                  pas0<-mus[ind0]/width
+#                  ws0<-(1/pas0)/sum(1/pas0)
+#
+#                  plotvals.mat0<-t(t(plotvals.mat0)*c(ws0))
+#                  plotvals0<-rowSums(plotvals.mat0)*fac0
+#                  pv<-cbind(pv,plotvals0/plotvals0[1])
+#                  colnames(pv)[ncol(pv)]<-paste(curr.term,"==",tl,sep="")
+#
+#               }
+#               plot.names<-c(plot.names,
+#                             paste("Levels of ",curr.term,sep=""))
 
             # continuous covariates
             # estimate the 0.25, 0.5 and 0.75 quantiles
+
+this.col.levels<-colnames(z[[1]])[grepl(curr.term,colnames(z[[1]]),fixed=TRUE)]
             }else{
-               ind<-colnames(data)==curr.term
-               # pull that column out
-               this.col<-data[,ind]
-               # find its "levels" - the 0.25, 0.5, 0.75 quantiles
-               this.col.levels<-quantile(this.col,c(0.25,0.5,0.75),names=FALSE)
-               # this is horrible, I'm really sorry
-               #this.col.levels<-unique(this.col)
 
-               for(tl in this.col.levels){
-                  ind0<-this.col<=tl
+this.col.levels<-quantile(z[[1]][,curr.term],c(0.25,0.5,0.75),names=FALSE)
 
-                  fac0<-sum(a$density*diff(a$breaks))/mean(mus[ind0])
-fac0<-1
-                  plotvals.mat0<-plotvals.mat[,ind0]
-                  pas0<-mus[ind0]/width
-                  ws0<-(1/pas0)/sum(1/pas0)
-ws0<-1
-                  plotvals.mat0<-t(t(plotvals.mat0)*c(ws0))
-                  plotvals0<-rowSums(plotvals.mat0)*fac0
-                  pv<-cbind(pv,plotvals0/plotvals0[1])
-                  colnames(pv)[ncol(pv)]<-paste(curr.term," ",tl," quantile",sep="")
-               }
-               plot.names<-c(plot.names,
-                             paste(curr.term," 0.25/0.5/0.75 quantiles",sep=""))
-            }
+}
 
-            plot.seq<-c(plot.seq,length(this.col.levels))
+
+# do the zero level for factors
+if(grepl("^as.factor",curr.term)){
+  z.copy <- z
+  z.copy[[1]][,grepl(curr.term,colnames(z[[1]]),fixed=TRUE)] <- 0
+
+  swpars.copy<-switchpars(pars,mix.terms,z=z.copy,zdim=zdim)
+  gp.copy<-getpars(swpars.copy$fpar,mix.terms,swpars.copy$zdim,swpars.copy$z)
+  sigma.copy<-gp.copy$key.scale
+  plotvals.mat<-apply(sigma.copy,2,eval.detfct,pis=pis,x=x.seq)
+  plotvals0<-rowSums(plotvals.mat)
+  pv<-cbind(pv,plotvals0/plotvals0[1])
+
+  colnames(pv)[ncol(pv)]<-paste(curr.term,"==",0,sep="")
+}
+
+for(tl in this.col.levels){
+  z.copy <- z
+  if(grepl("^as.factor",curr.term)){
+    z.copy[[1]][,tl] <- 1
+    z.copy[[1]][,colnames(z[[1]])[grepl(curr.term,colnames(z[[1]]),
+                                        fixed=TRUE)]!=tl] <- 0
+  }else{
+    z.copy[[1]][,curr.term] <- rep(tl,nrow(z.copy[[1]]))
+  }
+  swpars.copy<-switchpars(pars,mix.terms,z=z.copy,zdim=zdim)
+  gp.copy<-getpars(swpars.copy$fpar,mix.terms,swpars.copy$zdim,swpars.copy$z)
+  sigma.copy<-gp.copy$key.scale
+  plotvals.mat<-apply(sigma.copy,2,eval.detfct,pis=pis,x=x.seq)
+  plotvals0<-rowSums(plotvals.mat)
+  pv<-cbind(pv,plotvals0/plotvals0[1])
+
+  if(grepl("^as.factor",curr.term)){
+    colnames(pv)[ncol(pv)]<-paste(curr.term,"==",
+                  gsub("^as.factor\\(\\w+\\)(.*)$","\\1",curr.term),sep="")
+  }else{
+    colnames(pv)[ncol(pv)]<-paste(curr.term," ",tl," quantile",sep="")
+  }
+}
+
+
+
+if(grepl("^as.factor",curr.term)){
+  plot.names<-c(plot.names,paste("Levels of ",curr.term,sep=""))
+  plot.seq<-c(plot.seq,length(this.col.levels)+1)
+}else{
+  plot.names<-c(plot.names,
+              paste(curr.term," 0.25/0.5/0.75 quantiles",sep=""))
+  plot.seq<-c(plot.seq,length(this.col.levels))
+}
+
+#               ind<-colnames(data)==curr.term
+#               # pull that column out
+#               this.col<-data[,ind]
+#               # find its "levels" - the 0.25, 0.5, 0.75 quantiles
+#               this.col.levels<-quantile(this.col,c(0.25,0.5,0.75),names=FALSE)
+#
+#               for(tl in this.col.levels){
+#                  ind0<-this.col<=tl
+#
+#                  fac0<-sum(a$density*diff(a$breaks))/mean(mus[ind0])
+#                  plotvals.mat0<-plotvals.mat[,ind0]
+#                  pas0<-mus[ind0]/width
+#                  ws0<-(1/pas0)/sum(1/pas0)
+#
+#                  plotvals.mat0<-t(t(plotvals.mat0)*c(ws0))
+#                  plotvals0<-rowSums(plotvals.mat0)*fac0
+#                  pv<-cbind(pv,plotvals0/plotvals0[1])
+#                  colnames(pv)[ncol(pv)]<-paste(curr.term," ",tl," quantile",sep="")
+#               }
+#               plot.names<-c(plot.names,
+#                             paste(curr.term," 0.25/0.5/0.75 quantiles",sep=""))
+#            }
+
+#            plot.seq<-c(plot.seq,length(this.col.levels))
          }
          # how big does mfrow have to be?
          if(length(plot.seq)>4){
@@ -378,25 +435,32 @@ ws0<-1
          par(mfrow=mfrows)
       }
       par(las=1)
-      
+
       k<-1
       for(i in 1:length(plot.seq)){
 
-
+         # dummy plot to set things up
+         plot(x=c(0,width),
+              y=c(0,max(a$density,p.at.zero)),
+              type="n",
+              ylab=ylabel,axes=FALSE,
+              ylim=c(0,max(a$density,p.at.zero)),
+              xlim=c(0,width),
+              xlab=xlab,
+              main=plot.names[i],las=1,asp=1)
          # plot the histogram
-         plot(a,freq=FALSE,ylab=ylabel,axes=FALSE,
-              ylim=c(0,max(a$density,p.at.zero)),xlab=xlab,
-              main=plot.names[i],xlim=c(0,width),las=1,border=hist.col)
+         plot(a,freq=FALSE,add=TRUE,border=hist.col)
 
          if(!is.null(x.axis)){
             axis(1,x.axis)
          }else{
             axis(1)
          }
-         
+
          # get the labels right
          if(pt){
-            axis(2,at=c(0,p.at.zero/2,p.at.zero),labels=round(c(0,p.at.zero/2,p.at.zero),3))
+            axis(2,at=c(0,p.at.zero/2,p.at.zero),
+                   labels=round(c(0,p.at.zero/2,p.at.zero),3))
          }else{
             axis(2,at=c(0,p.at.zero/2,p.at.zero),labels=c(0,0.5,1))
          }
