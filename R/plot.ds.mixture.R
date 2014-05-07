@@ -148,9 +148,17 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
       }
 
       par(las=1)
+
+      # what is the upper limit of the plot?
+      if(hide.hist){
+        ylim.upper <- p.at.zero
+      }else{
+        ylim.upper <- max(a$density,p.at.zero)
+      }
+
       # actually do the plotting
       plot(a,freq=FALSE,ylab=ylabel,axes=FALSE,
-           ylim=c(0,max(a$density,p.at.zero)),xlim=c(0,width),
+           ylim=c(0,ylim.upper),xlim=c(0,width),
            xlab=xlab,border=hist.col,
            main=main)
       if(!is.null(x.axis)){
@@ -439,15 +447,21 @@ if(grepl("^as.factor",curr.term)){
       k<-1
       for(i in 1:length(plot.seq)){
 
+        # what is the upper limit of the plot?
+        if(hide.hist){
+          ylim.upper <- p.at.zero
+        }else{
+          ylim.upper <- max(a$density,p.at.zero)
+        }
          # dummy plot to set things up
          plot(x=c(0,width),
               y=c(0,max(a$density,p.at.zero)),
               type="n",
               ylab=ylabel,axes=FALSE,
-              ylim=c(0,max(a$density,p.at.zero)),
+              ylim=c(0,ylim.upper),
               xlim=c(0,width),
               xlab=xlab,
-              main=plot.names[i],las=1,asp=1)
+              main=plot.names[i],las=1)
          # plot the histogram
          plot(a,freq=FALSE,add=TRUE,border=hist.col)
 
