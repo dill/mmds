@@ -2,10 +2,10 @@
 \alias{mmds.pars}
 \title{Parameters in \code{mmds}}
 \description{
-  The internal parametrisation used in \code{mmds} is not
-  directly interpretable. This man page aims to explain how
-  to interpret the parameters and transform them into
-  useful information.
+The internal parametrisation used in \code{mmds} is not
+directly interpretable. This man page aims to explain how
+to interpret the parameters and transform them into useful
+information.
 }
 \section{Details}{
   Parametrisation works differently for the scale
@@ -39,6 +39,6 @@
   \code{\link{fitmix}}.
 }
 \author{
-  David L. Miller
+David L. Miller
 }
 

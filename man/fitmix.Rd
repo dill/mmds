@@ -2,10 +2,9 @@
 \alias{fitmix}
 \title{Mixture Model Distance Detection Function Fitting}
 \usage{
-  fitmix(data, width, mix.terms = 1, pt = FALSE,
-    model.formula = "~1", initialvalues = NULL, showit = 0,
-    ctrl.options = c(maxit = 10000),
-    opt.method = "BFGS+SANN", usegrad = TRUE, ftype = "hn")
+fitmix(data, width, mix.terms = 1, pt = FALSE, model.formula = "~1",
+  initialvalues = NULL, showit = 0, ctrl.options = c(maxit = 10000),
+  opt.method = "BFGS+SANN", usegrad = TRUE, ftype = "hn")
 }
 \arguments{
   \item{data}{\code{data.frame} containing the distances
@@ -43,12 +42,12 @@
   function, currently only "hn".}
 }
 \value{
-  a \code{\link{ds.mixture}} model object.
+a \code{\link{ds.mixture}} model object.
 }
 \description{
-  Fits a mixture of half-normals as a detection function to
-  distance sampling data collected via either line or point
-  transects, possibly with covariates.
+Fits a mixture of half-normals as a detection function to
+distance sampling data collected via either line or point
+transects, possibly with covariates.
 }
 \section{Details}{
   This is the main routine that fits mixture model
@@ -74,18 +73,18 @@ fit.sim.dat<-fitmix(sim.dat,1,2)
 summary(fit.sim.dat)
 }
 \author{
-  David L. Miller
+David L. Miller
 }
 \references{
-  Miller, D.L. and L. Thomas (in prep.). Mixture model
-  distance sampling detection functions.
+Miller, D.L. and L. Thomas (in prep.). Mixture model
+distance sampling detection functions.
 }
 \seealso{
-  \code{\link{summary.ds.mixture}}
-  \code{\link{step.ds.mixture}}
-  \code{\link{plot.ds.mixture}} \code{\link{sim.mix}}
-  \code{\link{mmds.gof}} \code{\link{ds.mixture}}
-  \code{\link{mmds.gof}} \code{\link{fitmix}}
-  \code{\link{mmds.pars}} \code{\link{step.ds.mixture}}
+\code{\link{summary.ds.mixture}}
+\code{\link{step.ds.mixture}} \code{\link{plot.ds.mixture}}
+\code{\link{sim.mix}} \code{\link{mmds.gof}}
+\code{\link{ds.mixture}} \code{\link{mmds.gof}}
+\code{\link{fitmix}} \code{\link{mmds.pars}}
+\code{\link{step.ds.mixture}}
 }
 

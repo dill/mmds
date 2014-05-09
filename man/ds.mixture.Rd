@@ -2,10 +2,10 @@
 \alias{ds.mixture}
 \title{A fitted Mixture Model Detection Function Object}
 \description{
-  The fitted mixture model detection function object
-  returned by \code{\link{fitmix}}. Knowledge of most of
-  this is not useful. Use \code{link{summary.ds.mixture}}
-  for result summaries.
+The fitted mixture model detection function object returned
+by \code{\link{fitmix}}. Knowledge of most of this is not
+useful. Use \code{link{summary.ds.mixture}} for result
+summaries.
 }
 \section{Details}{
   A \code{\link{ds.mixture}} object has the following
@@ -48,6 +48,6 @@
   components based on AIC score.
 }
 \author{
-  David L. Miller
+David L. Miller
 }
 

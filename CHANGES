@@ -1,3 +1,8 @@
+mmds 1.1.1
+----------
+
+ * hide.hist now a vector input, so you can choose which plots have histograms in the background
+
 mmds 1.1
 ------------
 

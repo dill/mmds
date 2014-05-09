@@ -2,8 +2,8 @@
 \alias{mmds.gof}
 \title{Goodness of fit for mixture model detection functions}
 \description{
-  Goodness of fit testing for detection for mixture model
-  detection functions.
+Goodness of fit testing for detection for mixture model
+detection functions.
 }
 \section{Details}{
   Two goodness of fit tests are provided: the Cramer-von

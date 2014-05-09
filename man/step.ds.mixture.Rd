@@ -2,7 +2,7 @@
 \alias{step.ds.mixture}
 \title{Stepwise selection of mixture components}
 \usage{
-  step.ds.mixture(ds.object, max.terms = 4)
+step.ds.mixture(ds.object, max.terms = 4)
 }
 \arguments{
   \item{ds.object}{\code{\link{ds.mixture}} object.}
@@ -11,11 +11,11 @@
   attempt to fit.  Default 4.}
 }
 \value{
-  a \code{\link{ds.mixture}} model object of the best
-  (AIC-wise) model.
+a \code{\link{ds.mixture}} model object of the best
+(AIC-wise) model.
 }
 \description{
-  Uses AIC to select the number of mixture components.
+Uses AIC to select the number of mixture components.
 }
 \section{Details}{
   This routine is most useful during model building.
@@ -35,6 +35,6 @@ fit.sim.dat.1<-fitmix(sim.dat,1,1)
 step.ds.mixture(fit.sim.dat.1)
 }
 \author{
-  David L. Miller
+David L. Miller
 }
 

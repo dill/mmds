@@ -1,7 +1,5 @@
-#plot.ds.mixture<-function(x,...){
-#plot.ds.mixture<-function(fit.object,style="",main="",breaks="Sturges",ylim=NULL,xlim=NULL,pdf=FALSE,plot.formula=NULL,hide.hist=FALSE,nomf=FALSE,x.axis=NULL){
 #' Plot the results of a mixture model detection function fit.
-#' 
+#'
 #' Plots the detection function (or pdf) of a fitted mixture model detection 
 #' function, optionally overlayed on a histogram of the observed data.
 #'
@@ -22,7 +20,7 @@
 #'    \code{NULL}, which plots all covariates. No effect with non-covariate 
 #'    models.
 #' @param hide.hist Should the histogram be hidden, leaving only the detection 
-#'    function (or pdf) to be plotted? Defaults to FALSE.
+#'    function (or pdf) to be plotted? Defaults to FALSE. Can be a vector the same length as the number of plots.
 #' @param nomf Should the mfrow value be altered? Useful when creating custom 
 #'    plots for publication. Defaults to FALSE (yes, change the mfrow value).
 #' @param x.axis Set the x axis labels. Again, useful for publication plots. 
@@ -80,11 +78,13 @@ plot.ds.mixture<-function(x,style="",main="",breaks="Sturges",ylim=NULL,xlim=NUL
       intfcn<-integrate.hn.pt
 
    # don't plot the histogram if asked
-   if(hide.hist){
-      hist.col<-"white"
-   }else{
-      hist.col<-"black"
-   }
+   #if(hide.hist){
+   #   hist.col<-"white"
+   #}else{
+   #   hist.col<-"black"
+   #}
+   hist.col <- rep("white",length(hide.hist))
+   hist.col[!hide.hist] <- "black"
 
    if(is.null(z)){
    ##### no covariates
@@ -445,10 +445,14 @@ if(grepl("^as.factor",curr.term)){
       par(las=1)
 
       k<-1
+
+      # histogram colours
+      hist.col <- rep(hist.col,length.out=length(plot.seq))
+
       for(i in 1:length(plot.seq)){
 
         # what is the upper limit of the plot?
-        if(hide.hist){
+        if(hist.col[i]=="white"){
           ylim.upper <- p.at.zero
         }else{
           ylim.upper <- max(a$density,p.at.zero)
@@ -463,7 +467,7 @@ if(grepl("^as.factor",curr.term)){
               xlab=xlab,
               main=plot.names[i],las=1)
          # plot the histogram
-         plot(a,freq=FALSE,add=TRUE,border=hist.col)
+         plot(a,freq=FALSE,add=TRUE,border=hist.col[i])
 
          if(!is.null(x.axis)){
             axis(1,x.axis)

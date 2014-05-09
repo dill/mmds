@@ -2,11 +2,10 @@
 \alias{plot.ds.mixture}
 \title{Plot the results of a mixture model detection function fit.}
 \usage{
-  \method{plot}{ds.mixture} (x, style = "", main = "",
-    breaks = "Sturges", ylim = NULL, xlim = NULL,
-    pdf = FALSE, plot.formula = NULL, hide.hist = FALSE,
-    nomf = FALSE, x.axis = NULL, xlab = "Distance",
-    ylab = NULL, ...)
+\method{plot}{ds.mixture}(x, style = "", main = "", breaks = "Sturges",
+  ylim = NULL, xlim = NULL, pdf = FALSE, plot.formula = NULL,
+  hide.hist = FALSE, nomf = FALSE, x.axis = NULL, xlab = "Distance",
+  ylab = NULL, ...)
 }
 \arguments{
   \item{x}{a \code{\link{ds.mixture}} object.}
@@ -41,7 +40,8 @@
 
   \item{hide.hist}{Should the histogram be hidden, leaving
   only the detection function (or pdf) to be plotted?
-  Defaults to FALSE.}
+  Defaults to FALSE. Can be a vector the same length as the
+  number of plots.}
 
   \item{nomf}{Should the mfrow value be altered? Useful
   when creating custom plots for publication. Defaults to
@@ -58,12 +58,12 @@
   \item{...}{not used at the moment}
 }
 \value{
-  a plot!
+a plot!
 }
 \description{
-  Plots the detection function (or pdf) of a fitted mixture
-  model detection function, optionally overlayed on a
-  histogram of the observed data.
+Plots the detection function (or pdf) of a fitted mixture
+model detection function, optionally overlayed on a
+histogram of the observed data.
 }
 \section{Details}{
   For covariate models, all the levels of factor variables
@@ -82,6 +82,6 @@ fit.sim.dat<-fitmix(sim.dat,1,2)
 plot(fit.sim.dat)
 }
 \author{
-  David L, Miller
+David L, Miller
 }
 
